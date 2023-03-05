@@ -21,3 +21,7 @@ https://www.youtube.com/watch?v=lyhIBNWwU0g&feature=youtu.be
 -Rewards can be editted from editor through hierarchy.
 
 -Grenade sprite used as a Bomb that ends the spin streak.
+
+-Player can not spin the wheel while it still spins.
+
+-Player can walk away anytime, while spin is not active.
