@@ -64,7 +64,7 @@ namespace VertigoDemo.Managers
         private void HandleStart()
         {
             OnSpinCompleteEvent?.Invoke(this, EventArgs.Empty);
-            HandleSpecialSpins();
+            // HandleSpecialSpins();
         }
     
         private async void  HandleSpin()
@@ -98,6 +98,7 @@ namespace VertigoDemo.Managers
         private async void HandleReward()
         {
             _successfulSpinCounter++;
+            HandleSpecialSpins();
             OnRewardDecidedEvent?.Invoke(this, EventArgs.Empty);
             OnSuccessfulSpinEvent?.Invoke(this, EventArgs.Empty);
             await Task.Delay(1000);

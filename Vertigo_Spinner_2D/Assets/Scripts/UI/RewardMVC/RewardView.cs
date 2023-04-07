@@ -41,6 +41,7 @@ namespace VertigoDemo.UI.RewardMVC
         {
             InitRewardImage();
             InitAmount();
+            
         }
 
         public override void DeInit()
@@ -103,6 +104,11 @@ namespace VertigoDemo.UI.RewardMVC
             return Model.RewardAmount;
         }
 
+        public Image GetRewardImage()
+        {
+            return _rewardImage;
+        }
+
         public RewardType GetRewardType()
         {
             return Model.RewardType;
@@ -110,10 +116,21 @@ namespace VertigoDemo.UI.RewardMVC
 
         public void RewardCollection()
         {
-            Sprite rewardImage = _rewardDataTemplate.RewardImage;
-            _rewardEarned.GetComponentInChildren<Image>().sprite = rewardImage;
+            // Sprite rewardImage = GetRewardImage();
+            _rewardEarned.GetComponentInChildren<Image>().sprite = GetRewardImage().sprite;
             var go = Instantiate(_rewardEarned, transform);
             go.DOMove(_selectedRewardEndPoint.position, 1f).OnComplete(() => Destroy(go.gameObject));
+        }
+
+        private void ArrangeSafeReward()
+        {
+            RewardDataTemplate safeReward = Configuration.RewardData.AllSafeRewardData[
+                Random.Range(0, Configuration.RewardData.AllSafeRewardData.Count)];
+            if (Model.IsExplosive)
+            {
+                _rewardImage.sprite = safeReward.RewardImage;
+                _rewardAmount.text = safeReward.RewardAmount.ToString();
+            }
         }
     
         private void AddEvents()
@@ -142,6 +159,7 @@ namespace VertigoDemo.UI.RewardMVC
         {
             ArrangeRewardAmount();
             UpdateAmount();
+            
         }
 
         private void OnRewardDecided(object sender, EventArgs e)
@@ -154,35 +172,18 @@ namespace VertigoDemo.UI.RewardMVC
     
         private void OnSuperSpinReached(object sender, EventArgs e)
         {
-            RewardDataTemplate safeReward = Configuration.RewardData.AllSafeRewardData[
-                Random.Range(0, Configuration.RewardData.AllSafeRewardData.Count)];
-            if (Model.IsExplosive)
-            {
-                _rewardImage.sprite = safeReward.RewardImage;
-            }
+            ArrangeSafeReward();
         }
 
         private void OnSilverSpinReached(object sender, EventArgs e)
         {
-            RewardDataTemplate safeReward = Configuration.RewardData.AllSafeRewardData[
-                Random.Range(0, Configuration.RewardData.AllSafeRewardData.Count)];
-            if (Model.IsExplosive)
-            {
-                _rewardImage.sprite = safeReward.RewardImage;
-                _rewardAmount.text = safeReward.RewardAmount.ToString();
-            }
+            // ArrangeSafeReward();
         }
 
         private void OnUnsuccessfulSpin()
         {
             Model.RewardAmount = _rewardDataTemplate.RewardAmount;
+            Model.IsExplosive = _rewardDataTemplate.IsExplosive;
         }
-    
-
-
-
-
-
-
     }
 }

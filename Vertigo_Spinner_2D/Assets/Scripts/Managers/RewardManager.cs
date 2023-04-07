@@ -18,6 +18,10 @@ namespace VertigoDemo.Managers
         public void SetSelectedReward(RewardView reward)
         {
             _selectedReward = reward;
+            if (!reward.Model.IsExplosive)
+            {
+                _selectedReward.RewardCollection();
+            }
             OnRewardSelectedEvent?.Invoke(this, reward.Model.IsExplosive);
         }
     }

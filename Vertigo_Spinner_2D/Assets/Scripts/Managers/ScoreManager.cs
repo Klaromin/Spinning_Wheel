@@ -9,7 +9,6 @@ namespace VertigoDemo.Managers
 {
     public class ScoreManager : Singleton<ScoreManager>
     {
- 
         [SerializeField] private TextMeshProUGUI _goldAmount;
         [SerializeField] private TextMeshProUGUI _moneyAmount;
         [SerializeField] private TextMeshProUGUI _medkitAmount;
@@ -63,22 +62,18 @@ namespace VertigoDemo.Managers
             if (GameManager.Instance.State == GameState.Reward)
             {
                 UpdateScore();
-                InitTexts();
-                _selectedReward.RewardCollection();
             }
-
             if (GameManager.Instance.State == GameState.GameOver)
             {
                 SetInitialScore();
-                InitTexts();
             }
+            InitTexts();
         }
 
         private void UpdateScore()
         {
             var rewardAmount = _selectedReward.GetRewardAmount();
             var rewardType = _selectedReward.GetRewardType();
-            Debug.Log("score updated" + _selectedReward.GetRewardAmount());
             switch (rewardType)
             {
                 case RewardType.C4:

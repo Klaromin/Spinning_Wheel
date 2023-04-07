@@ -15,7 +15,11 @@ namespace VertigoDemo.UI.Wheel
         [SerializeField] private Collider2D _indicatorCollider;
         [SerializeField] private Image _indicatorImage;
         [SerializeField] private Image _wheelImage;
+        [SerializeField] private Configuration _configuration;
 
+
+
+        
         private void Start()
         {
             AddEvents();
@@ -54,21 +58,27 @@ namespace VertigoDemo.UI.Wheel
         }
 
         private void InitSilverWheelImage()
-        {
-            _wheelImage.sprite = Configuration.SpinnerSprites.SilverSpinSprite;
-            _indicatorImage.sprite = Configuration.SpinnerSprites.SilverIndicatorSprite;
+        { 
+            Sprite silverSpinSprite = Resources.Load<Sprite>("Art/vertigo_games_game_dev_demo_sprites/ui_spins/UI_spin_silver_base");
+            Sprite silverIndicatorSprite = Resources.Load<Sprite>("Art/vertigo_games_game_dev_demo_sprites/ui_spins/UI_spin_silver_indicator");
+            _wheelImage.sprite = _configuration.SilverSpinSprite;
+            _indicatorImage.sprite = _configuration.SilverIndicatorSprite;
         }
 
         private void InitSuperWheelImage()
         {
-            _wheelImage.sprite = Configuration.SpinnerSprites.SuperSpinSprite;
-            _indicatorImage.sprite = Configuration.SpinnerSprites.SuperIndicatorSprite;
+            Sprite superSpinSprite = Resources.Load<Sprite>("Art/vertigo_games_game_dev_demo_sprites/ui_spins/UI_spin_golden_base");
+            Sprite superIndicatorSprite = Resources.Load<Sprite>("Art/vertigo_games_game_dev_demo_sprites/ui_spins/UI_spin_golden_indicator");
+            _wheelImage.sprite = _configuration.SuperSpinSprite;
+            _indicatorImage.sprite = _configuration.SuperIndicatorSprite;
         }
 
         private void InitBronzeWheelImage()
         {
-            _wheelImage.sprite = Configuration.SpinnerSprites.BronzeSpinSprite;
-            _indicatorImage.sprite = Configuration.SpinnerSprites.BronzeIndicatorSprite;
+            Sprite bronzeSpinSprite = Resources.Load<Sprite>("Art/vertigo_games_game_dev_demo_sprites/ui_spins/UI_spin_bronze_base");
+            Sprite bronzeIndicatorSprite = Resources.Load<Sprite>("Art/vertigo_games_game_dev_demo_sprites/ui_spins/UI_spin_bronze_indicator");
+            _wheelImage.sprite = _configuration.BronzeSpinSprite;
+            _indicatorImage.sprite = _configuration.BronzeIndicatorSprite;
         }
 
         private void EnableCollision()
