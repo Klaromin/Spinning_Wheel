@@ -15,5 +15,6 @@ MonoBehaviour:
   RewardID: reward_money
   RewardImage: {fileID: 21300000, guid: 5adf54964a74e2e40960fc8d0272042e, type: 3}
   RewardAmount: 250
-  IsBoom: 0
+  IsExplosive: 0
+  IsCurrency: 1
   RewardType: 4

@@ -1,34 +1,25 @@
 using System;
-using UnityEngine;
+using VertigoDemo.Helpers;
+using VertigoDemo.UI.RewardMVC;
 
-public class RewardManager : MonoBehaviour
+namespace VertigoDemo.Managers
 {
-
-    public event EventHandler<bool> OnRewardSelectedEvent;
-    public static RewardManager Instance { get; private set; }
-    private RewardView _selectedReward;
-    private void Awake()
+    public class RewardManager : Singleton<RewardManager>
     {
-        if (Instance != null)
-        {
-            Debug.LogError("There's more than one RewardView Manager! " + transform + " - " + Instance);
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-    }
-
-
-
-    public RewardView GetSelectedReward()
-    {
-        return _selectedReward;
-    }
+        public event EventHandler<bool> OnRewardSelectedEvent;
     
-    public void SetSelectedReward(RewardView reward)
-    {
-        _selectedReward = reward;
-         OnRewardSelectedEvent?.Invoke(this, reward.Model.IsBoom);
+        private RewardView _selectedReward;
+
+        public RewardView GetSelectedReward()
+        {
+            return _selectedReward;
+        }
+    
+        public void SetSelectedReward(RewardView reward)
+        {
+            _selectedReward = reward;
+            OnRewardSelectedEvent?.Invoke(this, reward.Model.IsExplosive);
+        }
     }
 }
 

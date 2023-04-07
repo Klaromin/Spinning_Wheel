@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 1112624280}
   - component: {fileID: 1112624279}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: UI_MainMenu_PlayButton_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -530,7 +530,7 @@ GameObject:
   - component: {fileID: 1360829955}
   - component: {fileID: 1360829954}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: UI_MainMenu_QuitButton_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -733,7 +733,7 @@ GameObject:
   - component: {fileID: 1715951714}
   - component: {fileID: 1715951713}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: UI_MainMenu_WelcomeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
