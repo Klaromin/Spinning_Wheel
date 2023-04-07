@@ -25,3 +25,8 @@ https://www.youtube.com/watch?v=lyhIBNWwU0g&feature=youtu.be
 -Player can not spin the wheel while it still spins.
 
 -Player can walk away anytime, while spin is not active.
+
+
+07.04.2023
+
+The project lacked namespaces and remove event methods due to get it completed by the deadline. Some refactoring has been made about namespaces and event add/remove
