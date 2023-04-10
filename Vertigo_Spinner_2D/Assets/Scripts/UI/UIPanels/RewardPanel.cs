@@ -11,6 +11,7 @@ namespace VertigoDemo.UI.UIPanels
     public class RewardPanel : MonoBehaviour
     {
         [SerializeField] private List<RewardView> _rewardViews;
+        private RewardView _currentRewardView;
         private int _counter;
         private int _currentAmount;
         private bool _isCurrency;
@@ -69,6 +70,11 @@ namespace VertigoDemo.UI.UIPanels
                     view.Init();
                 }
             }
+
+            if (_currentRewardView != null)
+            {
+                Debug.Log(_currentRewardView.GetRewardAmount());
+            }
         }
         
         private void OnSilverSpinReached(object sender, EventArgs e)
@@ -76,39 +82,61 @@ namespace VertigoDemo.UI.UIPanels
             
             RewardDataTemplate safeReward = Configuration.RewardData.AllSafeRewardData[
                 Random.Range(0, Configuration.RewardData.AllSafeRewardData.Count)];
+            
             foreach (var rewardView in _rewardViews)
             {
-
-
-                if (rewardView.Model.IsExplosive)
-                {               
-                    rewardView.Model.IsExplosive = false;
-                    rewardView.GetRewardImage().sprite = _currentImage;
-                    rewardView.Model.RewardAmount = _currentAmount;
-                    rewardView.Model.IsCurrency = _isCurrency;
-                    rewardView.Model.RewardType = _currentRewardType;
-
-                }
                 if (!rewardView.Model.IsExplosive)
                 {
                     if (safeReward.RewardType == rewardView.GetRewardType())
                     {
-                        _currentAmount = rewardView.GetRewardAmount();
-                        _isCurrency = rewardView.Model.IsCurrency;
-                        _currentImage = rewardView.GetRewardImage().sprite;
-                        _currentRewardType = rewardView.GetRewardType();
+                        _currentRewardView = rewardView;
+                        Debug.Log(_currentRewardView.GetRewardType());
+                        Debug.Log(_currentRewardView.GetRewardAmount());
+                        Debug.Log(_currentRewardView.Model.IsCurrency);
+                        Debug.Log(_currentRewardView.GetRewardImage().sprite);
+                        // _currentAmount = rewardView.GetRewardAmount();
+                        // _isCurrency = rewardView.Model.IsCurrency;
+                        // _currentImage = rewardView.GetRewardImage().sprite;
+                        // _currentRewardType = rewardView.GetRewardType();
                     }
                 }
- 
+                
+                if (rewardView.Model.IsExplosive)
+                {               
+                    rewardView.Model.IsExplosive = false;
+                    rewardView.GetRewardImage().sprite = _currentRewardView.GetRewardImage().sprite;
+                    rewardView.Model.RewardAmount = _currentRewardView.GetRewardAmount();
+                    rewardView.Model.IsCurrency = _currentRewardView.Model.IsCurrency;
+                    rewardView.Model.RewardType = _currentRewardView.GetRewardType();
+
+                }
+
             }
-            
-            // foreach (var rewardView in _rewardViews)
-            // {
-            //     if (rewardView.Model.IsExplosive)
-            //     {
-            //         rewardView.Model.IsExplosive = false;
-            //     }
-            // }
+
+        }
+        
+  
+        private void OnBronzeSpinReached(object sender, EventArgs e)
+        {
+            _counter = 0;
+            foreach (var rewardView in _rewardViews)
+            {
+                if (rewardView.Model.IsExplosive)
+                {
+                    _counter++;
+                }
+            }
+
+            if (_counter != 0) return;
+            int random = Random.Range(0, _rewardViews.Count);
+            var explosiveReward = _rewardViews[random];
+            explosiveReward.Model.IsExplosive = true;
+            explosiveReward.Model.IsCurrency = false;
+            explosiveReward.GetRewardImage().sprite =
+                Resources.Load<Sprite>(
+                    "Art/vertigo_games_game_dev_demo_sprites/ui_items/ui_icon_render_cons_grenade_m67");
+            explosiveReward.Model.RewardAmount = 0;
+
         }
         
         private void OnSuperSpinReached(object sender, EventArgs e)
@@ -133,28 +161,6 @@ namespace VertigoDemo.UI.UIPanels
                     rewardView.Model.RewardAmount = _currentAmount;
                 }
             }
-        }
-        private void OnBronzeSpinReached(object sender, EventArgs e)
-        {
-            _counter = 0;
-            foreach (var rewardView in _rewardViews)
-            {
-                if (rewardView.Model.IsExplosive)
-                {
-                    _counter++;
-                }
-            }
-
-            if (_counter != 0) return;
-            int random = Random.Range(0, _rewardViews.Count);
-            var explosiveReward = _rewardViews[random];
-            explosiveReward.Model.IsExplosive = true;
-            explosiveReward.Model.IsCurrency = false;
-            explosiveReward.GetRewardImage().sprite =
-                Resources.Load<Sprite>(
-                    "Art/vertigo_games_game_dev_demo_sprites/ui_items/ui_icon_render_cons_grenade_m67");
-            explosiveReward.Model.RewardAmount = 0;
-
         }
 
     }

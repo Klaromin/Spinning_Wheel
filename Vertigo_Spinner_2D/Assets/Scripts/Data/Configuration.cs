@@ -28,11 +28,12 @@ namespace VertigoDemo.Data
 
         public static class RewardData
         {
+            public static Sprite SilverSpin = Resources.Load<Sprite>("Art/_game_dev_demo_sprites/ui_spins/UI_spin_silver_base");
+            
             public static List<RewardDataTemplate> AllRewardData =
                 Resources.LoadAll<RewardDataTemplate>("Data/Reward Datas").ToList();
         
             public static List<RewardDataTemplate> AllSafeRewardData = AllRewardData.Where(c => c.IsExplosive == false).ToList();
         }
-
     }
 }

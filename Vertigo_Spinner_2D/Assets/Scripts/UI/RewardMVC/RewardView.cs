@@ -151,7 +151,6 @@ namespace VertigoDemo.UI.RewardMVC
     
         private void OnTriggerEnter2D(Collider2D col)
         {
-            Debug.Log("boom");
             RewardManager.Instance.SetSelectedReward(this);
         }
     
@@ -184,6 +183,7 @@ namespace VertigoDemo.UI.RewardMVC
         {
             Model.RewardAmount = _rewardDataTemplate.RewardAmount;
             Model.IsExplosive = _rewardDataTemplate.IsExplosive;
+            Model.IsCurrency = _rewardDataTemplate.IsCurrency;
         }
     }
 }
