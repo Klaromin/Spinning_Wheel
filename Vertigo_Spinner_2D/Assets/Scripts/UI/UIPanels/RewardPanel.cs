@@ -12,11 +12,12 @@ namespace VertigoDemo.UI.UIPanels
     {
         [SerializeField] private List<RewardView> _rewardViews;
         private RewardView _currentRewardView;
+        /* Test amaçlı
         private int _counter;
         private int _currentAmount;
         private bool _isCurrency;
         private Sprite _currentImage;
-        private RewardType _currentRewardType;
+        private RewardType _currentRewardType; */
         private void Awake()
         {
             InitInnerMVCs();
@@ -94,21 +95,16 @@ namespace VertigoDemo.UI.UIPanels
                         Debug.Log(_currentRewardView.GetRewardAmount());
                         Debug.Log(_currentRewardView.Model.IsCurrency);
                         Debug.Log(_currentRewardView.GetRewardImage().sprite);
-                        // _currentAmount = rewardView.GetRewardAmount();
-                        // _isCurrency = rewardView.Model.IsCurrency;
-                        // _currentImage = rewardView.GetRewardImage().sprite;
-                        // _currentRewardType = rewardView.GetRewardType();
                     }
                 }
-                
-                if (rewardView.Model.IsExplosive)
+
+                else if (rewardView.Model.IsExplosive)
                 {               
                     rewardView.Model.IsExplosive = false;
                     rewardView.GetRewardImage().sprite = _currentRewardView.GetRewardImage().sprite;
                     rewardView.Model.RewardAmount = _currentRewardView.GetRewardAmount();
                     rewardView.Model.IsCurrency = _currentRewardView.Model.IsCurrency;
                     rewardView.Model.RewardType = _currentRewardView.GetRewardType();
-
                 }
 
             }

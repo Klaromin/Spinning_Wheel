@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using VertigoDemo.Data;
@@ -17,13 +18,7 @@ namespace VertigoDemo.Managers
         [SerializeField] private TextMeshProUGUI _healthshotAmount;
     
         private RewardView _selectedReward;
-
-        private int _gold;
-        private int _money;
-        private int _c4;
-        private int _emp;
-        private int _medkit;
-        private int _healthshot;
+        private List<ItemScore> _scores = new();
 
         void Start()
         {
@@ -39,29 +34,45 @@ namespace VertigoDemo.Managers
 
         private void SetInitialScore()
         {
-            _gold = 0;
-            _money = 0;
-            _c4 = 0;
-            _emp = 0;
-            _medkit = 0;
-            _healthshot = 0;
+            foreach (var saferewardData in Configuration.RewardData.AllSafeRewardData)
+            {
+                var score = new ItemScore()
+                {
+                    Score = 0,
+                    RewardType = saferewardData.RewardType
+                };
+                _scores.Add(score);
+            }
         }
 
         private void InitTexts()
         {
-            _goldAmount.text = _gold.ToString();
-            _moneyAmount.text = _money.ToString();
-            _medkitAmount.text = _medkit.ToString();
-            _c4Amount.text = _c4.ToString();
-            _empAmount.text = _emp.ToString();
-            _healthshotAmount.text = _healthshot.ToString();
+            foreach (var score in _scores)
+            {
+                var amountText = GetTextForRewardType(score.RewardType);
+                amountText.text = score.Score.ToString();
+            }
+        }
+
+        private TextMeshProUGUI GetTextForRewardType(RewardType type)
+        {
+            return type switch
+            {
+                RewardType.C4 => _c4Amount,
+                RewardType.Gold => _goldAmount,
+                RewardType.EMP => _empAmount,
+                RewardType.Money => _moneyAmount,
+                RewardType.MedKit => _medkitAmount,
+                RewardType.HealthShot => _healthshotAmount,
+                _ => throw new NotImplementedException("This type is not Implemente")
+            };
         }
 
         private void SetScore()
         {
             if (GameManager.Instance.State == GameState.Reward)
             {
-                UpdateScore();
+                RefactorUpdateScore();
             }
             if (GameManager.Instance.State == GameState.GameOver)
             {
@@ -70,30 +81,17 @@ namespace VertigoDemo.Managers
             InitTexts();
         }
 
-        private void UpdateScore()
+        private void RefactorUpdateScore()
         {
             var rewardAmount = _selectedReward.GetRewardAmount();
             var rewardType = _selectedReward.GetRewardType();
-            switch (rewardType)
+
+            foreach (var score in _scores)
             {
-                case RewardType.C4:
-                    _c4 += rewardAmount;
-                    break;
-                case RewardType.Gold:
-                    _gold += rewardAmount;
-                    break;
-                case RewardType.EMP:
-                    _emp += rewardAmount;
-                    break;
-                case RewardType.Money:
-                    _money += rewardAmount;
-                    break;
-                case RewardType.MedKit:
-                    _medkit += rewardAmount;
-                    break;
-                case RewardType.HealthShot:
-                    _healthshot += rewardAmount;
-                    break;
+                if (score.RewardType == rewardType)
+                {
+                    score.Score += rewardAmount;
+                } 
             }
         }
 
