@@ -12,8 +12,9 @@ namespace VertigoDemo.UI.UIPanels
     {
         [SerializeField] private List<RewardView> _rewardViews;
         private RewardView _currentRewardView;
-        /* Test amaçlı
         private int _counter;
+        /* Test amaçlı
+        
         private int _currentAmount;
         private bool _isCurrency;
         private Sprite _currentImage;
@@ -140,22 +141,30 @@ namespace VertigoDemo.UI.UIPanels
             
             RewardDataTemplate safeReward = Configuration.RewardData.AllSafeRewardData[
                 Random.Range(0, Configuration.RewardData.AllSafeRewardData.Count)];
+            
             foreach (var rewardView in _rewardViews)
             {
-                
                 if (!rewardView.Model.IsExplosive)
                 {
                     if (safeReward.RewardType == rewardView.GetRewardType())
                     {
-                        _currentAmount = rewardView.GetRewardAmount();
+                        _currentRewardView = rewardView;
+                        Debug.Log(_currentRewardView.GetRewardType());
+                        Debug.Log(_currentRewardView.GetRewardAmount());
+                        Debug.Log(_currentRewardView.Model.IsCurrency);
+                        Debug.Log(_currentRewardView.GetRewardImage().sprite);
                     }
                 }
-                if (rewardView.Model.IsExplosive)
+
+                else if (rewardView.Model.IsExplosive)
                 {               
                     rewardView.Model.IsExplosive = false;
-                    rewardView.GetRewardImage().sprite = safeReward.RewardImage;
-                    rewardView.Model.RewardAmount = _currentAmount;
+                    rewardView.GetRewardImage().sprite = _currentRewardView.GetRewardImage().sprite;
+                    rewardView.Model.RewardAmount = _currentRewardView.GetRewardAmount();
+                    rewardView.Model.IsCurrency = _currentRewardView.Model.IsCurrency;
+                    rewardView.Model.RewardType = _currentRewardView.GetRewardType();
                 }
+
             }
         }
 
