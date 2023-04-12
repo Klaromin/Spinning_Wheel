@@ -116,37 +116,36 @@ namespace VertigoDemo.UI.RewardMVC
 
         public void RewardCollection()
         {
-            // Sprite rewardImage = GetRewardImage();
             _rewardEarned.GetComponentInChildren<Image>().sprite = GetRewardImage().sprite;
             var go = Instantiate(_rewardEarned, transform);
             go.DOMove(_selectedRewardEndPoint.position, 1f).OnComplete(() => Destroy(go.gameObject));
         }
 
-        private void ArrangeSafeReward()
-        {
-            RewardDataTemplate safeReward = Configuration.RewardData.AllSafeRewardData[
-                Random.Range(0, Configuration.RewardData.AllSafeRewardData.Count)];
-            if (Model.IsExplosive)
-            {
-                _rewardImage.sprite = safeReward.RewardImage;
-                _rewardAmount.text = safeReward.RewardAmount.ToString();
-            }
-        }
+        // private void ArrangeSafeReward()
+        // {
+        //     RewardDataTemplate safeReward = Configuration.RewardData.AllSafeRewardData[
+        //         Random.Range(0, Configuration.RewardData.AllSafeRewardData.Count)];
+        //     if (Model.IsExplosive)
+        //     {
+        //         _rewardImage.sprite = safeReward.RewardImage;
+        //         _rewardAmount.text = safeReward.RewardAmount.ToString();
+        //     }
+        // }
     
         private void AddEvents()
         {
             GameManager.Instance.OnSuccessfulSpinEvent += OnSuccessfulSpin;
             GameManager.Instance.OnRewardDecidedEvent += OnRewardDecided;
-            GameManager.Instance.OnSilverSpinReachedEvent += OnSilverSpinReached;
-            GameManager.Instance.OnSuperSpinReachedEvent += OnSuperSpinReached;
+            // GameManager.Instance.OnSilverSpinReachedEvent += OnSilverSpinReached;
+            // GameManager.Instance.OnSuperSpinReachedEvent += OnSuperSpinReached;
         }
 
         private void RemoveEvents()
         {
             GameManager.Instance.OnSuccessfulSpinEvent -= OnSuccessfulSpin;
             GameManager.Instance.OnRewardDecidedEvent -= OnRewardDecided;
-            GameManager.Instance.OnSilverSpinReachedEvent -= OnSilverSpinReached;
-            GameManager.Instance.OnSuperSpinReachedEvent -= OnSuperSpinReached;
+            // GameManager.Instance.OnSilverSpinReachedEvent -= OnSilverSpinReached;
+            // GameManager.Instance.OnSuperSpinReachedEvent -= OnSuperSpinReached;
         }
     
         private void OnTriggerEnter2D(Collider2D col)
@@ -169,15 +168,15 @@ namespace VertigoDemo.UI.RewardMVC
             }
         }
     
-        private void OnSuperSpinReached(object sender, EventArgs e)
-        {
-            ArrangeSafeReward();
-        }
-
-        private void OnSilverSpinReached(object sender, EventArgs e)
-        {
-            // ArrangeSafeReward();
-        }
+        // private void OnSuperSpinReached(object sender, EventArgs e)
+        // {
+        //     ArrangeSafeReward();
+        // }
+        //
+        // private void OnSilverSpinReached(object sender, EventArgs e)
+        // {
+        //     // ArrangeSafeReward();
+        // }
 
         private void OnUnsuccessfulSpin()
         {

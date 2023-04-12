@@ -55,17 +55,13 @@ namespace VertigoDemo.UI.Wheel
         }
 
         private void InitSilverWheelImage()
-        { 
-            Sprite silverSpinSprite = Resources.Load<Sprite>("Art/vertigo_games_game_dev_demo_sprites/ui_spins/UI_spin_silver_base");
-            Sprite silverIndicatorSprite = Resources.Load<Sprite>("Art/vertigo_games_game_dev_demo_sprites/ui_spins/UI_spin_silver_indicator");
+        {
             _wheelImage.sprite = _configuration.SilverSpinSprite;
             _indicatorImage.sprite = _configuration.SilverIndicatorSprite;
         }
 
         private void InitSuperWheelImage()
         {
-            Sprite superSpinSprite = Resources.Load<Sprite>("Art/vertigo_games_game_dev_demo_sprites/ui_spins/UI_spin_golden_base");
-            Sprite superIndicatorSprite = Resources.Load<Sprite>("Art/vertigo_games_game_dev_demo_sprites/ui_spins/UI_spin_golden_indicator");
             _wheelImage.sprite = _configuration.SuperSpinSprite;
             _indicatorImage.sprite = _configuration.SuperIndicatorSprite;
         }
@@ -125,6 +121,5 @@ namespace VertigoDemo.UI.Wheel
         {
             InitSilverWheelImage();
         }
-
     }
 }

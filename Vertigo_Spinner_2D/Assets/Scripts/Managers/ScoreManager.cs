@@ -64,7 +64,7 @@ namespace VertigoDemo.Managers
                 RewardType.Money => _moneyAmount,
                 RewardType.MedKit => _medkitAmount,
                 RewardType.HealthShot => _healthshotAmount,
-                _ => throw new NotImplementedException("This type is not Implemente")
+                _ => throw new NotImplementedException("This type is not Implemented")
             };
         }
 
@@ -72,7 +72,7 @@ namespace VertigoDemo.Managers
         {
             if (GameManager.Instance.State == GameState.Reward)
             {
-                RefactorUpdateScore();
+                UpdateScore();
             }
             if (GameManager.Instance.State == GameState.GameOver)
             {
@@ -81,7 +81,7 @@ namespace VertigoDemo.Managers
             InitTexts();
         }
 
-        private void RefactorUpdateScore()
+        private void UpdateScore()
         {
             var rewardAmount = _selectedReward.GetRewardAmount();
             var rewardType = _selectedReward.GetRewardType();
