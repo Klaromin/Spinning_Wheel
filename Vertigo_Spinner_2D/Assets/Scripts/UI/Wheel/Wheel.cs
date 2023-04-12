@@ -17,9 +17,6 @@ namespace VertigoDemo.UI.Wheel
         [SerializeField] private Image _wheelImage;
         [SerializeField] private Configuration _configuration;
 
-
-
-        
         private void Start()
         {
             AddEvents();
@@ -43,11 +40,11 @@ namespace VertigoDemo.UI.Wheel
             }
         }
 
-        private void Rotate() //Burayı düzelt.
+        private void Rotate()
         {
-            var angleArray = new[] { 360, 405, 450, 495, 540, 585, 630, 675, 720, 765, 810, 855, 900 };
-            var randomAngle = angleArray[Random.Range(0,angleArray.Length)];
-            Vector3 rotateVector = new Vector3(0, 0, randomAngle);
+            float fullSpin = 360f;
+            var randomAngle = Random.Range(1, 9) * 45f;
+            Vector3 rotateVector = new Vector3(0, 0, fullspin+randomAngle);
             var duration = 2.5f;
             _wheel.transform.DORotate(rotateVector, duration, RotateMode.WorldAxisAdd).SetEase(Ease.OutBack);
         }

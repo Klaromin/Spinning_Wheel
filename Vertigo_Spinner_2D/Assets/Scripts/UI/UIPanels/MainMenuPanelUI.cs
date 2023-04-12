@@ -16,7 +16,7 @@ namespace VertigoDemo.UI.UIPanels
 
         private void OnDisable()
         {
-            RemoveEvents(); //DENE
+            RemoveEvents(); 
         }
 
         private void Play()
