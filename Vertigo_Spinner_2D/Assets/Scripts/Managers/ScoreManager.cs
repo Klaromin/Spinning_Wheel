@@ -34,12 +34,12 @@ namespace VertigoDemo.Managers
 
         private void SetInitialScore()
         {
-            foreach (var saferewardData in Configuration.RewardData.AllSafeRewardData)
+            foreach (var safeRewardData in Configuration.AllSafeRewardData)
             {
                 var score = new ItemScore()
                 {
                     Score = 0,
-                    RewardType = saferewardData.RewardType
+                    RewardType = safeRewardData.RewardType
                 };
                 _scores.Add(score);
             }

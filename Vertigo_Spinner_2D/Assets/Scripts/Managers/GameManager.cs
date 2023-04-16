@@ -9,8 +9,6 @@ namespace VertigoDemo.Managers
 {
     public class GameManager : Singleton<GameManager>
     {
-
-    
         public event EventHandler OnRewardDecidedEvent;
         public event EventHandler OnSuccessfulSpinEvent;
         public event EventHandler OnSpinCompleteEvent;
@@ -64,7 +62,6 @@ namespace VertigoDemo.Managers
         private void HandleStart()
         {
             OnSpinCompleteEvent?.Invoke(this, EventArgs.Empty);
-            // HandleSpecialSpins();
         }
     
         private async void  HandleSpin()

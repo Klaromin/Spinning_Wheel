@@ -39,7 +39,35 @@ namespace VertigoDemo.UI.UIPanels
                 _rewardViews.Add(rewardView);
             }
         }
-    
+        
+        private void ArrangeRewardsAtSpecialSpin()
+        {
+            RewardDataTemplate safeReward = Configuration.AllSafeRewardData[
+                Random.Range(0, Configuration.AllSafeRewardData.Count)];
+            
+            foreach (var rewardView in _rewardViews)
+            {
+                switch (rewardView.Model.IsExplosive)
+                {
+                    case false:
+                    {
+                        if (safeReward.RewardType == rewardView.GetRewardType())
+                        {
+                            _currentRewardView = rewardView;
+                        }
+
+                        break;
+                    }
+                    case true:
+                        rewardView.Model.IsExplosive = false;
+                        rewardView.GetRewardImage().sprite = _currentRewardView.GetRewardImage().sprite;
+                        rewardView.Model.RewardAmount = _currentRewardView.GetRewardAmount();
+                        rewardView.Model.IsCurrency = _currentRewardView.Model.IsCurrency;
+                        rewardView.Model.RewardType = _currentRewardView.GetRewardType();
+                        break;
+                }
+            }
+        }
 
         private void AddEvents()
         {
@@ -73,34 +101,6 @@ namespace VertigoDemo.UI.UIPanels
             }
         }
 
-        private void ArrangeRewardsAtSpecialSpin()
-        {
-            RewardDataTemplate safeReward = Configuration.RewardData.AllSafeRewardData[
-                Random.Range(0, Configuration.RewardData.AllSafeRewardData.Count)];
-            
-            foreach (var rewardView in _rewardViews)
-            {
-                switch (rewardView.Model.IsExplosive)
-                {
-                    case false:
-                    {
-                        if (safeReward.RewardType == rewardView.GetRewardType())
-                        {
-                            _currentRewardView = rewardView;
-                        }
-
-                        break;
-                    }
-                    case true:
-                        rewardView.Model.IsExplosive = false;
-                        rewardView.GetRewardImage().sprite = _currentRewardView.GetRewardImage().sprite;
-                        rewardView.Model.RewardAmount = _currentRewardView.GetRewardAmount();
-                        rewardView.Model.IsCurrency = _currentRewardView.Model.IsCurrency;
-                        rewardView.Model.RewardType = _currentRewardView.GetRewardType();
-                        break;
-                }
-            }
-        }
         private void OnSilverSpinReached(object sender, EventArgs e)
         {
 

@@ -8,7 +8,7 @@ using VertigoDemo.Managers;
 
 namespace VertigoDemo.UI.UIPanels
 {
-    public class GameoverPanelUI : MonoBehaviour
+    public class GameOverPanelUI : MonoBehaviour
     {
         [SerializeField] private Button _retryButton;
         [SerializeField] private Button _menuButton;

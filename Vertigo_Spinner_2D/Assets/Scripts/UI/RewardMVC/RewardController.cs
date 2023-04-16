@@ -4,21 +4,11 @@ namespace VertigoDemo.UI.RewardMVC
 {
     public class RewardController : BaseController<RewardModel, RewardView>
     {
+        /*  -Controller boş ama esas amacı model ile view'ı birbirine bağlamak base controllerdan görülebilir.
+            -2. bir görev olarak da View'a eventler controller aracılığı ile de girebilirdi. */
+        
         public RewardController(RewardModel model, RewardView view) : base(model, view)
         {
         }
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
-
-
     }
 }
